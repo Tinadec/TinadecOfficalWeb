@@ -4,7 +4,8 @@ import en from './locales/en'
 
 function getSavedLocale(): string {
   if (typeof window !== 'undefined' && window.localStorage) {
-    return localStorage.getItem('tinadec-locale') ?? 'zh-CN'
+    const saved = localStorage.getItem('tinadec-locale')
+    if (saved === 'zh-CN' || saved === 'en') return saved
   }
   return 'zh-CN'
 }

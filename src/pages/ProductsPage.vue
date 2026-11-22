@@ -1,77 +1,143 @@
 <script setup lang="ts">
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { AppWindow, ArrowRight, Hourglass, Boxes } from '@lucide/vue'
-import PageHero from '@/components/PageHero.vue'
-import TerminalWindow from '@/components/TerminalWindow.vue'
-import FinalCTA from '@/sections/FinalCTA.vue'
-import { UiButton, UiBadge } from '@tinadec/ui'
+import { ArrowRight, ArrowUpRight, Download } from '@lucide/vue'
+import CopyCommand from '@/components/CopyCommand.vue'
+import { PRODUCTS, productPath, type ProductCategory } from '@/data/products'
 
 const { t } = useI18n()
+
+const filter = ref<'all' | ProductCategory>('all')
+
+const filtered = computed(() =>
+  filter.value === 'all' ? PRODUCTS : PRODUCTS.filter((p) => p.category === filter.value),
+)
 </script>
 
 <template>
   <div>
-    <PageHero :eyebrow="t('productsPage.eyebrow')" :title="t('productsPage.title')" :subtitle="t('productsPage.subtitle')" />
+    <section class="hero-atmosphere border-b-hairline pt-14 pb-12 sm:pt-20 sm:pb-16">
+      <div class="frame-width px-2 sm:px-6">
+        <p class="mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
+          {{ t('productsPage.eyebrow') }}
+        </p>
+        <h1 class="display-section mt-3 max-w-3xl text-3xl text-balance sm:text-5xl">
+          {{ t('productsPage.title') }}
+        </h1>
+        <p class="mt-4 max-w-2xl text-[15px] leading-relaxed text-[var(--text-secondary)]">
+          {{ t('productsPage.subtitle') }}
+        </p>
 
-    <section class="py-16 sm:py-20">
-      <div class="mx-auto max-w-6xl px-6">
-        <!-- 主产品：TinadecOffice -->
-        <article
-          class="grid items-center gap-8 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-section)] p-6 sm:p-10 lg:grid-cols-2"
-          :style="{ boxShadow: 'var(--shadow-panel)' }"
-        >
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="flex h-11 w-11 items-center justify-center rounded-lg" style="background: var(--accent-soft); color: var(--text-brand)">
-                <AppWindow class="h-5 w-5" />
-              </span>
-              <UiBadge variant="secondary">{{ t('productsPage.office.layer') }}</UiBadge>
-            </div>
-            <h2 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">{{ t('productsPage.office.name') }}</h2>
-            <div class="mt-1 text-sm font-medium" style="color: var(--text-brand)">{{ t('productsPage.office.tagline') }}</div>
-            <p class="mt-4 max-w-xl text-sm leading-relaxed text-[var(--text-secondary)]">{{ t('productsPage.office.desc') }}</p>
-            <div class="mt-7">
-              <router-link to="/products/tinadec-office">
-                <UiButton size="lg">
-                  {{ t('productsPage.office.cta') }}
-                  <ArrowRight class="h-4 w-4" />
-                </UiButton>
-              </router-link>
-            </div>
-          </div>
-
-          <TerminalWindow :title="`tinadec — ${t('hero.termTitle')}`" class="hidden sm:block">
-            <div class="term-body space-y-1.5 text-xs sm:text-[13px]">
-              <div class="term-line"><span class="select-none pr-3 text-[var(--accent-primary)]">❯</span><span class="text-[var(--text-primary)]">tinadec run "重构登录页为响应式布局"</span></div>
-              <div class="term-line"><span class="select-none pr-3 text-[var(--text-muted)]">·</span><span class="text-[var(--text-muted)]">governance + execution 并行 · 写操作经过审批门</span></div>
-              <div class="term-line"><span class="select-none pr-3 text-[var(--accent-success)]">✓</span><span class="text-[var(--accent-success)]">task graph · 3 节点已创建</span></div>
-              <div class="term-line"><span class="select-none pr-3 text-[var(--accent-warning)]">⏳</span><span class="text-[var(--accent-warning)]">write_file · src/pages/Login.vue — 等待审批</span></div>
-              <div class="term-line"><span class="select-none pr-3 text-[var(--accent-success)]">✓</span><span class="text-[var(--accent-success)]">apply_patch · +48 −12 · 12 tests passed</span></div>
-            </div>
-          </TerminalWindow>
-        </article>
-
-        <!-- 更多产品占位 -->
-        <div class="mt-14">
-          <div class="mb-3 text-xs font-semibold tracking-widest text-[var(--text-brand)] uppercase">{{ t('productsPage.comingTitle') }}</div>
-          <div class="grid gap-5 sm:grid-cols-3">
-            <div class="flex flex-col items-center rounded-xl border border-dashed p-8 text-center" style="border-color: var(--border-dashed)">
-              <Hourglass class="mb-3 h-6 w-6" style="color: var(--text-muted)" />
-              <div class="text-sm font-semibold text-[var(--text-secondary)]">{{ t('productsPage.comingSoon') }}</div>
-            </div>
-            <div class="flex flex-col items-center rounded-xl border border-dashed p-8 text-center" style="border-color: var(--border-dashed)">
-              <Hourglass class="mb-3 h-6 w-6" style="color: var(--text-muted)" />
-              <div class="text-sm font-semibold text-[var(--text-secondary)]">{{ t('productsPage.comingSoon') }}</div>
-            </div>
-            <router-link to="/architecture" class="flex flex-col items-center rounded-xl border p-8 text-center transition-all hover:-translate-y-0.5 hover:bg-[var(--surface-hover)]" style="border-color: var(--border-default); background: var(--surface-section)">
-              <Boxes class="mb-3 h-6 w-6" style="color: var(--accent-primary)" />
-              <div class="text-sm font-semibold">{{ t('productsPage.comingDesc') }}</div>
-            </router-link>
-          </div>
+        <!-- Category Filters -->
+        <div class="mt-8 inline-flex flex-wrap gap-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-secondary)] p-1">
+          <button
+            type="button"
+            class="rounded-full px-4 py-1.5 text-xs font-medium transition-colors"
+            :class="filter === 'all' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-xs' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'"
+            @click="filter = 'all'"
+          >
+            {{ t('productsPage.filterAll') }}
+          </button>
+          <button
+            type="button"
+            class="rounded-full px-4 py-1.5 text-xs font-medium transition-colors"
+            :class="filter === 'platform' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-xs' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'"
+            @click="filter = 'platform'"
+          >
+            {{ t('productsPage.filterPlatform') }}
+          </button>
+          <button
+            type="button"
+            class="rounded-full px-4 py-1.5 text-xs font-medium transition-colors"
+            :class="filter === 'workbench' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-xs' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'"
+            @click="filter = 'workbench'"
+          >
+            {{ t('productsPage.filterWorkbench') }}
+          </button>
         </div>
       </div>
     </section>
 
-    <FinalCTA />
+    <section class="py-14 sm:py-20">
+      <div class="frame-width px-2 sm:px-6">
+        <div class="grid gap-5 md:grid-cols-2">
+          <article
+            v-for="item in filtered"
+            :key="item.slug"
+            class="flex min-w-0 flex-col justify-between rounded-3xl border border-[var(--border-default)] bg-[var(--bg-secondary)] p-6 transition-colors hover:bg-[var(--bg-elevated)] sm:p-7"
+          >
+            <div>
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border-default)] bg-[var(--bg-primary)] text-[var(--text-primary)]">
+                    <component :is="item.icon" class="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <span class="mono text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                      {{ item.category === 'platform' ? t('ecosystem.badgePlatform') : t('ecosystem.badgeWorkbench') }}
+                    </span>
+                    <h2 class="text-lg font-semibold tracking-tight">{{ t(`${item.i18nKey}.name`) }}</h2>
+                  </div>
+                </div>
+                <span class="mono rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] px-2.5 py-0.5 text-[11px] text-[var(--text-secondary)]">
+                  {{ t(`${item.i18nKey}.license`) }}
+                </span>
+              </div>
+
+              <p class="mt-2 text-xs font-medium text-[var(--text-muted)]">{{ t(`${item.i18nKey}.tagline`) }}</p>
+              <p class="mt-4 text-[13px] leading-relaxed text-[var(--text-secondary)]">
+                {{ t(`${item.i18nKey}.lead`) }}
+              </p>
+
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="mono rounded-md border border-[var(--border-default)] bg-[var(--bg-primary)] px-2 py-0.5 text-[11px] text-[var(--text-primary)]">
+                  {{ t(`${item.i18nKey}.version`) }}
+                </span>
+                <span
+                  v-for="plat in item.platforms"
+                  :key="plat"
+                  class="mono rounded-md border border-[var(--border-muted)] bg-[var(--bg-primary)] px-2 py-0.5 text-[11px] text-[var(--text-muted)]"
+                >
+                  {{ plat }}
+                </span>
+              </div>
+
+              <div class="mt-4">
+                <CopyCommand :command="item.installCmd" compact />
+              </div>
+            </div>
+
+            <div class="mt-6 flex flex-wrap items-center gap-3 border-t-hairline pt-4 text-xs">
+              <router-link
+                :to="productPath(item)"
+                class="inline-flex items-center gap-1.5 font-medium text-[var(--text-brand)] hover:underline"
+              >
+                <span>{{ t('ecosystem.inspectDetail') }}</span>
+                <ArrowRight class="h-3.5 w-3.5" aria-hidden="true" />
+              </router-link>
+              <a
+                :href="item.repoUrl"
+                target="_blank"
+                rel="noreferrer"
+                class="inline-flex items-center gap-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+              >
+                <span>{{ t('ecosystem.repoLink') }}</span>
+                <ArrowUpRight class="h-3 w-3" aria-hidden="true" />
+              </a>
+              <a
+                v-if="item.releaseUrl"
+                :href="item.releaseUrl"
+                target="_blank"
+                rel="noreferrer"
+                class="btn-primary ml-auto inline-flex items-center gap-1 rounded-full bg-[var(--primary)] px-3 py-1 text-[11px] font-medium text-[var(--primary-foreground)] hover:opacity-90"
+              >
+                <Download class="h-3 w-3" aria-hidden="true" />
+                <span>{{ t('ecosystem.releaseLink') }}</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
