@@ -2,3 +2,6 @@ node_modules/
 dist/
 *.local
 .DS_Store
+
+# Qoder Sites 部署描述符：该托管链路已废弃，不再入库
+*.qoder.site
