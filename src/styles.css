@@ -165,6 +165,12 @@
 }
 
 @layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   html {
     font-family: var(--font-sans);
     scrollbar-gutter: stable;
@@ -297,6 +303,58 @@ pre {
 .spatial-inner {
   border: var(--hairline) solid var(--border-default);
   background: var(--bg-primary);
+}
+
+/* Architectural 7px crosshair mark & museum gallery plinth */
+.crosshair-mark {
+  pointer-events: none;
+  position: relative;
+  display: block;
+  width: 7px;
+  height: 7px;
+}
+
+.crosshair-mark::before,
+.crosshair-mark::after {
+  content: "";
+  position: absolute;
+  background: var(--border-strong);
+}
+
+.crosshair-mark::before {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: var(--hairline);
+  transform: translateY(-50%);
+}
+
+.crosshair-mark::after {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: var(--hairline);
+  transform: translateX(-50%);
+}
+
+.gallery-plinth {
+  border: var(--hairline) solid var(--border-default);
+  background: color-mix(in srgb, var(--bg-secondary) 86%, transparent);
+  backdrop-filter: blur(12px);
+  transition:
+    border-color 260ms var(--ease-out-quint),
+    background-color 260ms var(--ease-out-quint),
+    transform 420ms var(--ease-spring),
+    box-shadow 320ms var(--ease-out-quint);
+}
+
+@media (hover: hover) {
+  .gallery-plinth:hover {
+    border-color: var(--border-strong);
+    background: var(--bg-elevated);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-stage);
+  }
 }
 
 /* Display typography */

@@ -13,4 +13,13 @@ export default defineConfig({
   server: {
     port: 5190,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/three')) return 'three'
+        },
+      },
+    },
+  },
 })

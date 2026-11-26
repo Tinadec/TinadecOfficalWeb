@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { ArrowUpRight, Download, Monitor, Package } from '@lucide/vue'
+import { ArrowUpRight, Download, Monitor, Package, Scale } from '@lucide/vue'
 import QuickStartBand from '@/stages/QuickStartBand.vue'
 import { COMMUNITY_LINKS } from '@/data/products'
 
@@ -15,6 +15,13 @@ const platforms = computed(() => {
 const prereqs = computed(() => {
   const raw = tm('downloadPage.prereqs') as { tool: unknown; purpose: unknown }[]
   return Array.isArray(raw) ? raw.map((p) => ({ tool: String(p.tool), purpose: String(p.purpose) })) : []
+})
+
+const licenses = computed(() => {
+  const raw = tm('downloadPage.licenses') as { name: unknown; scope: unknown; license: unknown }[]
+  return Array.isArray(raw)
+    ? raw.map((r) => ({ name: String(r.name), scope: String(r.scope), license: String(r.license) }))
+    : []
 })
 </script>
 
@@ -124,6 +131,29 @@ const prereqs = computed(() => {
                 <span>GitHub · TinadecBand</span>
                 <ArrowUpRight class="h-3.5 w-3.5" aria-hidden="true" />
               </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- License Matrix -->
+        <div class="mt-8 rounded-3xl border border-[var(--border-default)] bg-[var(--bg-secondary)] p-6 sm:p-8">
+          <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+            <Scale class="h-4 w-4" aria-hidden="true" />
+            <span>{{ t('downloadPage.licenseTitle') }}</span>
+          </div>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div
+              v-for="row in licenses"
+              :key="row.name"
+              class="min-w-0 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-primary)] p-4"
+            >
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-sm font-semibold">{{ row.name }}</span>
+                <span class="mono shrink-0 rounded-full border border-[var(--border-default)] bg-[var(--bg-secondary)] px-2 py-0.5 text-[10px] font-medium text-[var(--text-primary)]">
+                  {{ row.license }}
+                </span>
+              </div>
+              <div class="mt-1.5 text-xs text-[var(--text-muted)]">{{ row.scope }}</div>
             </div>
           </div>
         </div>

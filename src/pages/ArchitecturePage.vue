@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import ArchitectureTopology from '@/stages/ArchitectureTopology.vue'
-import HeroSpatialStage from '@/stages/HeroSpatialStage.vue'
+import HtmlInCanvasStage from '@/stages/HtmlInCanvasStage.vue'
 import QuickStartBand from '@/stages/QuickStartBand.vue'
 
 const { t } = useI18n()
@@ -25,11 +25,7 @@ const { t } = useI18n()
 
     <ArchitectureTopology />
 
-    <section class="border-t-hairline py-16 sm:py-20">
-      <div class="frame-width px-2 sm:px-6">
-        <HeroSpatialStage />
-      </div>
-    </section>
+    <HtmlInCanvasStage />
 
     <QuickStartBand />
   </div>

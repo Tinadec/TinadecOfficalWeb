@@ -163,7 +163,7 @@ onBeforeUnmount(() => {
         </router-link>
 
         <router-link
-          to="/#workbench"
+          to="/#spatial-stage"
           class="rounded-full px-3 py-1 text-[13px] font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
         >
           {{ t('nav.workbench') }}
@@ -226,6 +226,7 @@ onBeforeUnmount(() => {
         <router-link to="/" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-[var(--surface-hover)]" @click="closeAll">{{ t('nav.home') }}</router-link>
         <router-link to="/products/" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-[var(--surface-hover)]" @click="closeAll">{{ t('nav.products') }}</router-link>
         <router-link to="/architecture/" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-[var(--surface-hover)]" @click="closeAll">{{ t('nav.architecture') }}</router-link>
+        <router-link to="/#spatial-stage" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-[var(--surface-hover)]" @click="closeAll">{{ t('nav.workbench') }}</router-link>
         <router-link to="/download/" class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-[var(--surface-hover)]" @click="closeAll">{{ t('nav.download') }}</router-link>
         <div class="mt-3 flex flex-wrap items-center justify-between gap-3 border-t-hairline pt-4">
           <ThemeSegmented compact />
