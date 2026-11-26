@@ -1,0 +1,59 @@
+TinadecOfficalWeb NOTICE
+Copyright (c) 2026 Lincube
+
+This file aggregates third-party copyright and license notices for the
+Tinadec official website repository. The website source code is licensed
+under the GNU Affero General Public License v3.0 or later; brand assets are
+separately reserved.
+
+  Website source (src/, scripts/, config) : GNU Affero General Public License
+                                             v3.0 or later (AGPL-3.0-or-later)
+                                             — see ./LICENSE
+
+--------------------------------------------------------------------------
+1. Brand assets (reserved, not covered by the AGPL)
+
+  public/tinadec-logo.svg                  : Copyright (c) 2026 Lincube,
+  public/tinadec-logo.png                    all rights reserved.
+  public/Tinadec-calligraphy.svg             Use requires permission.
+  public/favicon.svg                        The footer of the site declares the
+                                             brand rights statement.
+  public/media/poster.webp
+  public/media/tinadec-office-16x9.mp4
+
+--------------------------------------------------------------------------
+2. Fonts
+
+  Geist Variable, Geist Mono (self-hosted) : SIL Open Font License 1.1
+                                             (OFL-1.1) — src/fonts/
+                                             woff2 files are vendored under
+                                             src/fonts/files/
+
+--------------------------------------------------------------------------
+3. Node dependencies
+
+  Vue (3.6.0-rc.2) + @vue/* compiler/runtime   : MIT
+  Vue Router (4.6.4)                           : MIT
+  Vue I18n (11.4.10)                           : MIT
+  three (0.187.0)                             : MIT
+  @lucide/vue (1.34.0)                        : ISC
+  Vite (7.3.6) + @vitejs/plugin-vue (6.0.0)   : MIT
+  Tailwind CSS (4.3.3) + @tailwindcss/vite     : MIT
+  tw-animate-css                              : MIT
+  TypeScript (5.9.3)                          : Apache-2.0
+
+  See package.json and package-lock.json for the full transitive list. Each
+  package retains its upstream license under node_modules/<pkg>/LICENSE.
+
+--------------------------------------------------------------------------
+How to comply
+
+  * When redistributing the source, keep ./LICENSE and preserve this NOTICE.
+  * The site is served over the network. Under AGPL-3.0 Section 13, users who
+    interact with it remotely must be offered the Corresponding Source — the
+    public repository is that offer.
+  * The brand assets in section 1 are not licensed by the AGPL and must not be
+    reused without permission; they are excluded from the Corresponding Source
+    grant.
+  * Upstream licenses prevail for their respective packages. This NOTICE does
+    not modify any license terms.
