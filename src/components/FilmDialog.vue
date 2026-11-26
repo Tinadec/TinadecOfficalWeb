@@ -7,6 +7,9 @@ import { closeFilmDialog, filmDialogOpen } from '@/composables/useFilmModal'
 const { t } = useI18n()
 const dialogRef = ref<HTMLDialogElement | null>(null)
 const videoRef = ref<HTMLVideoElement | null>(null)
+// Mirrors the build-time base so the media still resolves when the site is
+// hosted under a subpath (e.g. "/TinadecOfficalWeb/").
+const mediaBase = import.meta.env.BASE_URL
 
 watch(filmDialogOpen, async (open) => {
   const el = dialogRef.value
@@ -54,8 +57,8 @@ function onBackdropClick(e: MouseEvent) {
         <video
           ref="videoRef"
           class="aspect-video w-full rounded-xl"
-          src="/media/tinadec-office-16x9.mp4"
-          poster="/media/poster.webp"
+          :src="`${mediaBase}media/tinadec-office-16x9.mp4`"
+          :poster="`${mediaBase}media/poster.webp`"
           controls
           playsinline
         />
