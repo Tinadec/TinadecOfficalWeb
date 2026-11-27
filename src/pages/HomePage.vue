@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { ArrowDown, Play, Sparkles } from '@lucide/vue'
+import { ArrowDown, Download, Play } from '@lucide/vue'
 import ManifestoChoreography from '@/stages/ManifestoChoreography.vue'
 import HtmlInCanvasStage from '@/stages/HtmlInCanvasStage.vue'
 import CuratedWorksGallery from '@/stages/CuratedWorksGallery.vue'
@@ -19,11 +19,6 @@ const { t } = useI18n()
 const activeChapter = ref(0)
 const heroSectionRef = ref<HTMLElement | null>(null)
 const lowerSectionRef = ref<HTMLElement | null>(null)
-
-function enterSpatialStage() {
-  const target = document.getElementById('spatial-stage')
-  target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-}
 
 let observer: IntersectionObserver | null = null
 
@@ -76,16 +71,16 @@ onBeforeUnmount(() => {
             </span>
           </div>
 
-          <!-- Two-Tone Symmetric Poetic Headline -->
+          <!-- Two-Tone Symmetric Headline -->
           <h1
-            class="display-hero hero-reveal mt-8 text-[2rem] text-balance sm:text-[3.5rem] lg:text-[4.25rem]"
+            class="display-hero hero-reveal mt-8 text-[2rem] text-balance sm:text-[3.35rem] lg:text-[4rem]"
             style="--reveal-delay: 110ms"
           >
             <span class="block text-[var(--text-primary)]">{{ t('hero.titleLine1') }}</span>
             <span class="mt-1.5 block text-[var(--text-muted)]">{{ t('hero.titleLine2') }}</span>
           </h1>
 
-          <!-- Concise Poetic Statement -->
+          <!-- Subtitle -->
           <p
             class="hero-reveal mt-6 max-w-2xl text-[15px] leading-[1.8] text-pretty text-[var(--text-secondary)] sm:text-[17px]"
             style="--reveal-delay: 180ms"
@@ -93,19 +88,18 @@ onBeforeUnmount(() => {
             {{ t('hero.subtitle') }}
           </p>
 
-          <!-- Pure Action Pair (No CLI clutter) -->
+          <!-- Action Pair -->
           <div
             class="hero-reveal mt-10 flex flex-wrap items-center justify-center gap-3.5"
             style="--reveal-delay: 240ms"
           >
-            <button
-              type="button"
+            <router-link
+              to="/download/"
               class="btn-primary inline-flex h-11 items-center gap-2 rounded-full px-6 text-sm font-medium transition-opacity hover:opacity-90"
-              @click="enterSpatialStage"
             >
-              <Sparkles class="h-4 w-4" aria-hidden="true" />
-              <span>{{ t('hero.ctaEnter') }}</span>
-            </button>
+              <Download class="h-4 w-4" aria-hidden="true" />
+              <span>{{ t('hero.ctaDownload') }}</span>
+            </router-link>
 
             <button
               type="button"
